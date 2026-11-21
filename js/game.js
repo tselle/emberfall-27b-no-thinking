@@ -647,6 +647,8 @@ Game.buildCampaign = function () {
         '<p><b>Length:</b> ' + mo.length + ' · <b>Difficulty:</b> ' + '◆'.repeat(mo.diff) + '<span class="dim">' + '◇'.repeat(4 - mo.diff) + '</span></p>' +
         '<p class="dim"><b>Hint:</b> ' + mo.hint + '</p>';
       G.camp.module = modId;
+      const as2 = document.getElementById('bCampAssemble');
+      if (as2) as2.disabled = false;
       Game.renderPartyNote();
     };
     cards.appendChild(card);
@@ -765,7 +767,10 @@ Game.beginAdventure = function () {
 Game.bringParty = function () {
   const body = document.createElement('div');
   body.className = 'slots';
-  body.innerHTML = '<p class="dim">Bring a saved company into this adventure.</p>';
+  const has = [0, 1, 2, 3].some((i) => Campaign.readSlot(i));
+  body.innerHTML = '<p class="dim">' + (has
+    ? 'Bring a saved company into this adventure.'
+    : 'No saved company found yet. Saves appear while you play (auto-save) or from the menu.') + '</p>';
   for (let i = 0; i <= 3; i++) {
     const data = Campaign.readSlot(i);
     const row = document.createElement('div');

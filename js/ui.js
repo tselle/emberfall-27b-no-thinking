@@ -52,6 +52,7 @@ UI.modal = function (title, bodyEl, opts) {
   else body.appendChild(bodyEl);
   box.appendChild(body);
   root.appendChild(box);
+  root.classList.add('open');
   UI.stack.push(box);
   box._onclose = opts.onclose;
   return body;
@@ -60,6 +61,10 @@ UI.closeTop = function () {
   const box = UI.stack.pop();
   if (!box) return;
   box.remove();
+  if (!UI.stack.length) {
+    const r = document.getElementById('modalRoot');
+    if (r) r.classList.remove('open');
+  }
   if (box._onclose) box._onclose();
 };
 UI.closeAll = function () { while (UI.stack.length) UI.closeTop(); };
@@ -398,12 +403,12 @@ UI.slots = function (mode) {
   info.textContent = mode === 'load' ? 'Choose a save to load.' : 'Choose a slot to save in.';
   body.appendChild(info);
   for (let i = 1; i <= 3; i++) {
-    const data = window.G ? G.loadSlot(i) : null;
+    const meta = window.Campaign ? Campaign.slotMeta(i) : null;
     const row = document.createElement('div');
     row.className = 'slotrow';
-    if (data) {
-      row.innerHTML = '<b>Slot ' + i + '</b> — ' + (data.name || 'Party') + ' · Day ' + data.day + ' · ' + (data.timeStr || '') + (data.auto ? ' (auto)' : '') +
-        '<span class="dim"> — ' + (data.moduleName || '') + '</span>';
+    if (meta) {
+      row.innerHTML = '<b>Slot ' + i + '</b> — ' + (meta.name || 'Party') + ' · Day ' + meta.day + ' · ' + meta.timeStr + (meta.auto ? ' (auto)' : '') +
+        '<span class="dim"> — ' + (meta.moduleName || '') + '</span>';
       const btn = document.createElement('button');
       btn.className = 'mbtn';
       btn.textContent = mode === 'load' ? 'Load' : 'Overwrite';
