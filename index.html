@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Emberfall — The Emberwild Saga</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div id="app">
+
+  <!-- ============ TITLE ============ -->
+  <section id="title" class="screen">
+    <canvas id="emberCv" aria-hidden="true"></canvas>
+    <div class="title-box">
+      <h1 id="titleWord">Emberfall</h1>
+      <p class="subtitle">The Emberwild Saga</p>
+      <div class="title-actions">
+        <button class="btn primary" id="bNew">New Game</button>
+        <button class="btn" id="bContinue">Continue</button>
+        <button class="btn" id="bLoad">Load Game</button>
+        <button class="btn" id="bHow">How to Play</button>
+      </div>
+      <p class="fine">An unofficial, non-commercial fan project in the style of
+      late-1980s gold-box adventure games. Not affiliated with or endorsed by
+      any tabletop or computer-game publisher.</p>
+    </div>
+  </section>
+
+  <!-- ============ CHOOSE AN ADVENTURE ============ -->
+  <section id="campaign" class="screen hidden">
+    <header class="panel-head">
+      <h2>Choose an Adventure</h2>
+      <span class="panel-sub" id="campModName"></span>
+    </header>
+    <div id="campTabs" class="tabs" role="tablist"></div>
+    <div id="campBody">
+      <div id="campCards" class="card-list"></div>
+      <div id="campCard" class="card detail"></div>
+    </div>
+    <footer class="panel-foot">
+      <button class="btn" id="bCampBack">Back</button>
+      <span id="campPartyNote" class="dim"></span>
+      <button class="btn" id="bCampImport">Bring party…</button>
+      <button class="btn primary" id="bCampAssemble">Assemble the Company</button>
+    </footer>
+  </section>
+
+  <!-- ============ ASSEMBLY ============ -->
+  <section id="assembly" class="screen hidden">
+    <header class="panel-head">
+      <h2>Assemble Your Company</h2>
+      <span class="panel-sub" id="asModName"></span>
+    </header>
+    <div id="asIntro" class="card intro"></div>
+    <div class="as-cols">
+      <div class="as-col">
+        <h3>Waiting</h3>
+        <div id="asWait" class="roster"></div>
+        <button class="btn" id="bAsCreate">New Recruit</button>
+      </div>
+      <div class="as-col">
+        <h3>In the Field</h3>
+        <div id="asActive" class="roster"></div>
+        <div id="asFunds" class="dim"></div>
+        <p class="dim small">The first three able members deploy in front; the next three behind.</p>
+      </div>
+    </div>
+    <footer class="panel-foot">
+      <button class="btn" id="bAsBack">Back</button>
+      <button class="btn primary" id="bAsBegin">Begin the Adventure</button>
+    </footer>
+  </section>
+
+  <!-- ============ GAME ============ -->
+  <section id="game" class="screen hidden">
+    <div id="hud">
+      <button class="btn icon" id="bParty" title="Toggle party (P)" aria-label="Toggle party">☰</button>
+      <span id="hudPips"></span>
+      <span id="hudLoc" class="loc"></span>
+      <span id="hudFace" class="dim"></span>
+      <span id="hudDesc"></span>
+      <span class="hud-right">
+        <span id="hudTime"></span>
+        <span id="hudGold" class="gold"></span>
+        <button class="btn icon" id="bMenu" title="Menu (Esc)" aria-label="Menu">≡</button>
+      </span>
+    </div>
+    <div id="stage">
+      <canvas id="view3d"></canvas>
+      <canvas id="overCanvas" class="hidden"></canvas>
+      <canvas id="combatCanvas" class="hidden"></canvas>
+    </div>
+    <div id="lower">
+      <div id="leftCol">
+        <div id="cmdbar"></div>
+        <div id="cmdhint"></div>
+        <div id="log"></div>
+      </div>
+      <canvas id="minimap" width="500" height="420"></canvas>
+    </div>
+    <aside id="party" class="hidden"></aside>
+    <div id="navpad" class="hidden"></div>
+  </section>
+
+</div>
+<div id="modalRoot"></div>
+<noscript><p style="color:#e9e2cf">Emberfall needs JavaScript to run.</p></noscript>
+
+<script src="js/rules.js"></script>
+<script src="js/data.js"></script>
+<script src="js/modules.js"></script>
+<script src="js/monsters.js"></script>
+<script src="js/wilds.js"></script>
+<script src="js/treasure.js"></script>
+<script src="js/adventures.js"></script>
+<script src="js/figures.js"></script>
+<script src="js/view3d.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/combat.js"></script>
+<script src="js/overland.js"></script>
+<script src="js/campaign.js"></script>
+<script src="js/journal.js"></script>
+<script src="js/map.js"></script>
+<script src="js/bestiary.js"></script>
+<script src="js/navpad.js"></script>
+<script src="js/watch.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
